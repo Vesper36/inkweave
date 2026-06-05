@@ -1,7 +1,7 @@
 from datetime import datetime
 from uuid import uuid4
 
-from sqlalchemy import Boolean, DateTime, String, Text, func
+from sqlalchemy import Boolean, DateTime, ForeignKey, String, Text, func
 from sqlalchemy.dialects.postgresql import UUID
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
@@ -32,7 +32,7 @@ class UserPreference(Base):
     __tablename__ = "user_preferences"
 
     id: Mapped[str] = mapped_column(UUID(as_uuid=False), primary_key=True, default=lambda: str(uuid4()))
-    user_id: Mapped[str] = mapped_column(UUID(as_uuid=False), unique=True, index=True)
+    user_id: Mapped[str] = mapped_column(UUID(as_uuid=False), ForeignKey("users.id"), unique=True, index=True)
     theme: Mapped[str] = mapped_column(String(50), default="light")
     font_size: Mapped[int] = mapped_column(default=16)
     font_family: Mapped[str] = mapped_column(String(100), default="system-ui")

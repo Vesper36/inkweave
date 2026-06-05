@@ -12,7 +12,7 @@ class Work(Base):
     __tablename__ = "works"
 
     id: Mapped[str] = mapped_column(UUID(as_uuid=False), primary_key=True, default=lambda: str(uuid4()))
-    author_id: Mapped[str] = mapped_column(UUID(as_uuid=False), index=True)
+    author_id: Mapped[str] = mapped_column(UUID(as_uuid=False), ForeignKey("users.id"), index=True)
     title: Mapped[str] = mapped_column(String(255))
     slug: Mapped[str] = mapped_column(String(255), unique=True, index=True)
     description: Mapped[str | None] = mapped_column(Text)
@@ -38,7 +38,7 @@ class Volume(Base):
     __tablename__ = "volumes"
 
     id: Mapped[str] = mapped_column(UUID(as_uuid=False), primary_key=True, default=lambda: str(uuid4()))
-    work_id: Mapped[str] = mapped_column(UUID(as_uuid=False), index=True)
+    work_id: Mapped[str] = mapped_column(UUID(as_uuid=False), ForeignKey("works.id"), index=True)
     title: Mapped[str] = mapped_column(String(255))
     description: Mapped[str | None] = mapped_column(Text)
     sort_order: Mapped[int] = mapped_column(Integer, default=0)
@@ -53,8 +53,8 @@ class Chapter(Base):
     __tablename__ = "chapters"
 
     id: Mapped[str] = mapped_column(UUID(as_uuid=False), primary_key=True, default=lambda: str(uuid4()))
-    volume_id: Mapped[str] = mapped_column(UUID(as_uuid=False), index=True)
-    work_id: Mapped[str] = mapped_column(UUID(as_uuid=False), index=True)
+    volume_id: Mapped[str] = mapped_column(UUID(as_uuid=False), ForeignKey("volumes.id"), index=True)
+    work_id: Mapped[str] = mapped_column(UUID(as_uuid=False), ForeignKey("works.id"), index=True)
     title: Mapped[str] = mapped_column(String(255))
     slug: Mapped[str] = mapped_column(String(255))
     content: Mapped[dict | None] = mapped_column(JSONB)  # MDX AST + metadata

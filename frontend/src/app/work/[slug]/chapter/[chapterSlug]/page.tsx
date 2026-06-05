@@ -49,8 +49,8 @@ const mockChapter = {
       <p>This chapter was inspired by the fine-tuning problem in physics. The fine-structure constant (approximately 1/137) is one of the most precisely measured quantities in physics, and nobody knows why it has the value it does. What if the answer is simpler -- and more terrifying -- than we imagine?</p>
     </details>
   `,
-  prev_chapter: null,
-  next_chapter: { title: "Chapter 2: The First Variable", slug: "the-first-variable" },
+  prev_chapter: null as { title: string; slug: string } | null,
+  next_chapter: { title: "Chapter 2: The First Variable", slug: "the-first-variable" } as { title: string; slug: string } | null,
   work: { title: "The Last Algorithm", slug: "the-last-algorithm" },
   volume: { title: "Part I: The Source Code" },
 };
