@@ -100,8 +100,8 @@ export default function ChapterPage() {
           </h1>
 
           <div className="mt-3 flex items-center gap-4 text-sm" style={{ color: "var(--text-muted)" }}>
-            <span>{formatNumber(chapter.word_count)} words</span>
-            <span>~{Math.ceil(chapter.word_count / 500)} min read</span>
+            <span>{formatNumber(chapter.word_count)} 字</span>
+            <span>约{Math.ceil(chapter.word_count / 500)}分钟</span>
           </div>
         </div>
 
@@ -124,7 +124,7 @@ export default function ChapterPage() {
             style={{ borderColor: "var(--border)", backgroundColor: "var(--bg-secondary)" }}
           >
             <h3 className="text-sm font-semibold mb-2" style={{ color: "var(--text-muted)" }}>
-              Author&apos;s Note
+              作者的话
             </h3>
             <p className="text-sm leading-relaxed" style={{ color: "var(--text-secondary)" }}>
               {chapter.author_note}
@@ -169,7 +169,7 @@ export default function ChapterPage() {
             style={{ color: "var(--text-muted)" }}
           >
             <BookOpen className="h-4 w-4" />
-            Back to Table of Contents
+            返回目录
           </Link>
         </div>
       </div>
@@ -205,7 +205,7 @@ export default function ChapterPage() {
             style={{ backgroundColor: "var(--bg-primary)", border: "1px solid var(--border)" }}
           >
             <div className="flex items-center justify-between mb-6">
-              <h3 className="text-lg font-semibold" style={{ color: "var(--text-primary)" }}>Reading Settings</h3>
+              <h3 className="text-lg font-semibold" style={{ color: "var(--text-primary)" }}>阅读设置</h3>
               <button onClick={() => setShowSettings(false)} style={{ color: "var(--text-muted)" }}>
                 <X className="h-5 w-5" />
               </button>
@@ -214,7 +214,7 @@ export default function ChapterPage() {
             {/* Font Size */}
             <div className="mb-6">
               <label className="block text-sm font-medium mb-2" style={{ color: "var(--text-secondary)" }}>
-                Font Size: {fontSize}px
+                字体大小: {fontSize}px
               </label>
               <input
                 type="range"
@@ -229,7 +229,7 @@ export default function ChapterPage() {
             {/* Line Height */}
             <div className="mb-6">
               <label className="block text-sm font-medium mb-2" style={{ color: "var(--text-secondary)" }}>
-                Line Height: {lineHeight}
+                行高: {lineHeight}
               </label>
               <input
                 type="range"

@@ -51,17 +51,17 @@ const mockWorks: Work[] = [
 ];
 
 const sortOptions = [
-  { value: "updated_at", label: "Recently Updated" },
-  { value: "created_at", label: "Newest" },
-  { value: "view_count", label: "Most Viewed" },
-  { value: "favorite_count", label: "Most Favorited" },
+  { value: "updated_at", label: "最近更新" },
+  { value: "created_at", label: "最新发布" },
+  { value: "view_count", label: "最多阅读" },
+  { value: "favorite_count", label: "最多收藏" },
 ];
 
 const ratingFilters = [
-  { value: "", label: "All Ratings" },
-  { value: "general", label: "General" },
-  { value: "teen", label: "Teen" },
-  { value: "mature", label: "Mature" },
+  { value: "", label: "全部分级" },
+  { value: "general", label: "全年龄" },
+  { value: "teen", label: "青少年" },
+  { value: "mature", label: "成人级" },
 ];
 
 export default function BrowsePage() {
@@ -87,10 +87,10 @@ export default function BrowsePage() {
       {/* Page Header */}
       <div className="mb-8">
         <h1 className="text-3xl font-bold" style={{ color: "var(--text-primary)", fontFamily: "var(--font-serif)" }}>
-          Browse Works
+          发现作品
         </h1>
         <p className="mt-2 text-sm" style={{ color: "var(--text-muted)" }}>
-          Discover stories across genres, fandoms, and styles.
+          探索各种体裁、同人圈和风格的故事。
         </p>
       </div>
 
@@ -101,7 +101,7 @@ export default function BrowsePage() {
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4" style={{ color: "var(--text-muted)" }} />
             <input
               type="text"
-              placeholder="Search by title, description, tag..."
+              placeholder="搜索作品标题、简介、标签..."
               value={search}
               onChange={(e) => setSearch(e.target.value)}
               className="w-full rounded-lg border py-2.5 pl-10 pr-4 text-sm outline-none transition-colors focus:ring-2"
@@ -118,14 +118,14 @@ export default function BrowsePage() {
             style={{ borderColor: "var(--border)", color: "var(--text-secondary)", backgroundColor: "var(--bg-secondary)" }}
           >
             <SlidersHorizontal className="h-4 w-4" />
-            Filters
+            筛选
           </button>
         </div>
 
         {showFilters && (
           <div className="flex flex-wrap gap-4 rounded-lg border p-4" style={{ borderColor: "var(--border)", backgroundColor: "var(--bg-secondary)" }}>
             <div>
-              <label className="block text-xs font-medium mb-1.5" style={{ color: "var(--text-muted)" }}>Sort by</label>
+              <label className="block text-xs font-medium mb-1.5" style={{ color: "var(--text-muted)" }}>排序方式</label>
               <select
                 value={sort}
                 onChange={(e) => setSort(e.target.value)}
@@ -138,7 +138,7 @@ export default function BrowsePage() {
               </select>
             </div>
             <div>
-              <label className="block text-xs font-medium mb-1.5" style={{ color: "var(--text-muted)" }}>Rating</label>
+              <label className="block text-xs font-medium mb-1.5" style={{ color: "var(--text-muted)" }}>分级</label>
               <select
                 value={rating}
                 onChange={(e) => setRating(e.target.value)}
@@ -156,7 +156,7 @@ export default function BrowsePage() {
 
       {/* Results */}
       <div className="mb-4 text-sm" style={{ color: "var(--text-muted)" }}>
-        {filtered.length} work{filtered.length !== 1 ? "s" : ""} found
+        {filtered.length} 部作品
       </div>
 
       <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
@@ -167,7 +167,7 @@ export default function BrowsePage() {
 
       {filtered.length === 0 && (
         <div className="py-20 text-center">
-          <p className="text-lg" style={{ color: "var(--text-muted)" }}>No works found matching your criteria.</p>
+          <p className="text-lg" style={{ color: "var(--text-muted)" }}>没有找到符合条件的内容。</p>
         </div>
       )}
     </div>

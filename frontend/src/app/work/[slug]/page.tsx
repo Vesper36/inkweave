@@ -81,7 +81,7 @@ export default function WorkDetailPage() {
                 <User className="h-4 w-4" />
                 {work.author.display_name}
               </Link>
-              <span>{work.rating !== "general" ? (work.rating === "mature" ? "18+" : "PG-13") : "General"}</span>
+              <span>{work.rating !== "general" ? (work.rating === "mature" ? "18+" : "PG-13") : "全年龄"}</span>
             </div>
 
             {work.description && (
@@ -108,8 +108,8 @@ export default function WorkDetailPage() {
             <div className="mt-5 flex items-center gap-5 text-sm" style={{ color: "var(--text-muted)" }}>
               <span className="flex items-center gap-1.5"><Eye className="h-4 w-4" />{formatNumber(work.view_count)}</span>
               <span className="flex items-center gap-1.5"><Heart className="h-4 w-4" />{formatNumber(work.favorite_count)}</span>
-              <span>{formatNumber(work.word_count)} words</span>
-              <span className="flex items-center gap-1.5"><Clock className="h-4 w-4" />Updated {formatDate(work.updated_at)}</span>
+              <span>{formatNumber(work.word_count)} 字</span>
+              <span className="flex items-center gap-1.5"><Clock className="h-4 w-4" />更新于 {formatDate(work.updated_at)}</span>
             </div>
           </div>
         </div>
@@ -122,10 +122,10 @@ export default function WorkDetailPage() {
       >
         <div className="px-6 py-4 border-b" style={{ borderColor: "var(--border)" }}>
           <h2 className="text-lg font-semibold" style={{ color: "var(--text-primary)", fontFamily: "var(--font-serif)" }}>
-            Table of Contents
+            目录
           </h2>
           <p className="text-sm mt-1" style={{ color: "var(--text-muted)" }}>
-            {work.volumes.length} volumes, {work.volumes.reduce((sum, v) => sum + v.chapters.length, 0)} chapters
+            {work.volumes.length} 卷, {work.volumes.reduce((sum, v) => sum + v.chapters.length, 0)} 章
           </p>
         </div>
 
@@ -137,7 +137,7 @@ export default function WorkDetailPage() {
             >
               {volume.title}
               <span className="ml-2 font-normal" style={{ color: "var(--text-muted)" }}>
-                ({volume.chapters.length} chapters)
+                ({volume.chapters.length} 章)
               </span>
             </div>
 
@@ -157,7 +157,7 @@ export default function WorkDetailPage() {
                   </span>
                 </div>
                 <div className="flex items-center gap-3 text-xs" style={{ color: "var(--text-muted)" }}>
-                  <span>{formatNumber(chapter.word_count)} words</span>
+                  <span>{formatNumber(chapter.word_count)} 字</span>
                   <ChevronRight className="h-4 w-4" />
                 </div>
               </Link>

@@ -26,5 +26,8 @@ export function formatNumber(num: number): string {
 export function estimateReadTime(wordCount: number): string {
   const minutes = Math.ceil(wordCount / 500);
   if (minutes < 1) return "不到1分钟";
-  return `${minutes}分钟`;
+  if (minutes < 60) return `${minutes}分钟`;
+  const hours = Math.floor(minutes / 60);
+  const remainMin = minutes % 60;
+  return remainMin > 0 ? `${hours}小时${remainMin}分钟` : `${hours}小时`;
 }

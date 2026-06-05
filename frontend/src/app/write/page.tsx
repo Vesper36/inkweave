@@ -11,10 +11,10 @@ export default function WritePage() {
           className="text-3xl font-bold"
           style={{ color: "var(--text-primary)", fontFamily: "var(--font-serif)" }}
         >
-          Write
+          写作
         </h1>
         <p className="mt-2 text-sm" style={{ color: "var(--text-muted)" }}>
-          Create and manage your works.
+          创作与管理你的作品。
         </p>
       </div>
 
@@ -31,8 +31,8 @@ export default function WritePage() {
             <PenLine className="h-6 w-6" style={{ color: "var(--accent)" }} />
           </div>
           <div>
-            <h3 className="font-semibold" style={{ color: "var(--text-primary)" }}>New Work</h3>
-            <p className="text-sm" style={{ color: "var(--text-muted)" }}>Start a new story from scratch</p>
+            <h3 className="font-semibold" style={{ color: "var(--text-primary)" }}>新建作品</h3>
+            <p className="text-sm" style={{ color: "var(--text-muted)" }}>从零开始创作一个新故事</p>
           </div>
         </button>
 
@@ -47,8 +47,8 @@ export default function WritePage() {
             <FileText className="h-6 w-6" style={{ color: "var(--accent)" }} />
           </div>
           <div>
-            <h3 className="font-semibold" style={{ color: "var(--text-primary)" }}>Import</h3>
-            <p className="text-sm" style={{ color: "var(--text-muted)" }}>Import from Markdown or DOCX</p>
+            <h3 className="font-semibold" style={{ color: "var(--text-primary)" }}>导入文档</h3>
+            <p className="text-sm" style={{ color: "var(--text-muted)" }}>从 Markdown 或 DOCX 导入</p>
           </div>
         </button>
       </div>
@@ -60,17 +60,17 @@ export default function WritePage() {
       >
         <BookOpen className="h-12 w-12 mx-auto mb-4" style={{ color: "var(--text-muted)" }} />
         <h3 className="text-lg font-semibold mb-2" style={{ color: "var(--text-primary)" }}>
-          Your Works
+          我的作品
         </h3>
         <p className="text-sm mb-6" style={{ color: "var(--text-muted)" }}>
-          Sign in to see your works and start writing.
+          登录后即可查看你的作品并开始创作。
         </p>
         <Link
           href="/login"
           className="inline-flex items-center gap-2 rounded-lg px-5 py-2.5 text-sm font-semibold text-white transition-all hover:opacity-90"
           style={{ backgroundColor: "var(--accent)" }}
         >
-          Sign In
+          登录
         </Link>
       </div>
     </div>
