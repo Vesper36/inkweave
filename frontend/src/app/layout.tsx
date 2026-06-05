@@ -19,16 +19,16 @@ const notoSerif = Noto_Serif_SC({
 
 export const metadata: Metadata = {
   title: {
-    default: "InkWeave - Structured Narrative Platform",
-    template: "%s | InkWeave",
+    default: "墨织 InkWeave - 结构化叙事平台",
+    template: "%s | 墨织 InkWeave",
   },
   description:
-    "A structured narrative platform for creators and readers. Build digital libraries where stories breathe.",
-  keywords: ["fiction", "fanfiction", "writing", "reading", "stories", "novels"],
+    "面向创作者与读者的结构化叙事平台。为长篇连载、同人衍生、互动文本提供卷册管理、多主题阅读、安全富媒体渲染。",
+  keywords: ["小说", "同人", "写作", "阅读", "故事", "网络文学", "创作平台"],
   openGraph: {
     type: "website",
     locale: "zh_CN",
-    siteName: "InkWeave",
+    siteName: "墨织 InkWeave",
   },
 };
 

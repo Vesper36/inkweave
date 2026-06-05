@@ -18,21 +18,21 @@ export function Header() {
           <Link href="/" className="flex items-center gap-2">
             <BookOpen className="h-7 w-7" style={{ color: "var(--accent)" }} />
             <span className="text-xl font-bold tracking-tight" style={{ color: "var(--text-primary)", fontFamily: "var(--font-serif)" }}>
-              InkWeave
+              墨织
             </span>
           </Link>
 
           {/* Desktop Nav */}
           <nav className="hidden md:flex items-center gap-6">
             <Link href="/browse" className="text-sm font-medium transition-colors hover:opacity-80" style={{ color: "var(--text-secondary)" }}>
-              Browse
+              发现
             </Link>
             <Link href="/tags" className="text-sm font-medium transition-colors hover:opacity-80" style={{ color: "var(--text-secondary)" }}>
-              Tags
+              标签
             </Link>
             <Link href="/write" className="flex items-center gap-1.5 text-sm font-medium transition-colors hover:opacity-80" style={{ color: "var(--accent)" }}>
               <PenLine className="h-4 w-4" />
-              Write
+              写作
             </Link>
           </nav>
 
@@ -78,7 +78,7 @@ export function Header() {
               <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4" style={{ color: "var(--text-muted)" }} />
               <input
                 type="text"
-                placeholder="Search works, tags, authors..."
+                placeholder="搜索作品、标签、作者..."
                 autoFocus
                 className="w-full rounded-lg border py-2.5 pl-10 pr-4 text-sm outline-none transition-colors focus:ring-2"
                 style={{
@@ -96,13 +96,13 @@ export function Header() {
         {mobileMenuOpen && (
           <nav className="md:hidden border-t pb-4 pt-3 space-y-2" style={{ borderColor: "var(--border)" }}>
             <Link href="/browse" className="block px-3 py-2 text-sm font-medium rounded-lg" style={{ color: "var(--text-secondary)" }} onClick={() => setMobileMenuOpen(false)}>
-              Browse
+              发现
             </Link>
             <Link href="/tags" className="block px-3 py-2 text-sm font-medium rounded-lg" style={{ color: "var(--text-secondary)" }} onClick={() => setMobileMenuOpen(false)}>
-              Tags
+              标签
             </Link>
             <Link href="/write" className="block px-3 py-2 text-sm font-medium rounded-lg" style={{ color: "var(--accent)" }} onClick={() => setMobileMenuOpen(false)}>
-              Write
+              写作
             </Link>
           </nav>
         )}
