@@ -124,3 +124,65 @@ export interface PaginatedResponse<T> {
   page: number;
   page_size: number;
 }
+
+// Search types
+export interface SearchHit {
+  id: string;
+  title: string;
+  slug: string;
+  description?: string;
+  author_name?: string;
+  rating?: string;
+  tags?: string[];
+  tag_names?: string[];
+  word_count?: number;
+  view_count?: number;
+  favorite_count?: number;
+  updated_at?: number;
+  work_id?: string;
+  work_slug?: string;
+  work_title?: string;
+  content_text?: string;
+  _formatted?: Record<string, string>;
+}
+
+export interface SearchResults {
+  works: { hits: SearchHit[]; total_hits: number; processing_time: number } | null;
+  chapters: { hits: SearchHit[]; total_hits: number; processing_time: number } | null;
+  total: number;
+}
+
+export interface SearchSuggestion {
+  title: string;
+  slug: string;
+  author_name: string;
+  rating: string;
+}
+
+// Search API
+export const searchApi = {
+  search: (params: {
+    q: string;
+    type?: string;
+    page?: number;
+    page_size?: number;
+    status?: string;
+    rating?: string;
+    tags?: string;
+    sort?: string;
+  }) => {
+    const sp = new URLSearchParams();
+    sp.set("q", params.q);
+    if (params.type) sp.set("type", params.type);
+    if (params.page) sp.set("page", String(params.page));
+    if (params.page_size) sp.set("page_size", String(params.page_size));
+    if (params.status) sp.set("status", params.status);
+    if (params.rating) sp.set("rating", params.rating);
+    if (params.tags) sp.set("tags", params.tags);
+    if (params.sort) sp.set("sort", params.sort);
+    return api.get<SearchResults>(`/api/search?${sp.toString()}`);
+  },
+
+  suggest: (q: string) =>
+    api.get<{ suggestions: SearchSuggestion[] }>(`/api/search/suggest?q=${encodeURIComponent(q)}`),
+};

@@ -1,17 +1,25 @@
 from contextlib import asynccontextmanager
+import logging
 
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 from app.config import get_settings
-from app.routers import auth_router, works_router, tags_router
+from app.routers import auth_router, works_router, tags_router, search_router
 
+logger = logging.getLogger(__name__)
 settings = get_settings()
 
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    # Startup
+    # Startup: configure Meilisearch indices
+    try:
+        from app.services.search import search_service
+        await search_service.setup_indices()
+        logger.info("Meilisearch indices initialized")
+    except Exception as e:
+        logger.warning("Meilisearch not available: %s", e)
     yield
     # Shutdown
 
@@ -36,6 +44,7 @@ app.add_middleware(
 app.include_router(auth_router, prefix="/api")
 app.include_router(works_router, prefix="/api")
 app.include_router(tags_router, prefix="/api")
+app.include_router(search_router, prefix="/api")
 
 
 @app.get("/api/health")

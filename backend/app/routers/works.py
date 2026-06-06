@@ -1,10 +1,13 @@
-from fastapi import APIRouter, Depends, HTTPException, Query, status
+import re
+
+from fastapi import APIRouter, BackgroundTasks, Depends, HTTPException, Query, status
 from sqlalchemy import func, select
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.database import get_db
 from app.models.user import User
 from app.models.work import Work, Volume, Chapter
+from app.models.tag import Tag, WorkTag
 from app.schemas.work import (
     WorkCreate, WorkUpdate, WorkResponse, WorkListResponse,
     VolumeCreate, VolumeUpdate, VolumeResponse,
@@ -14,6 +17,50 @@ from app.core.security import get_current_user
 from app.core.utils import generate_slug, count_words
 
 router = APIRouter(prefix="/works", tags=["works"])
+
+
+async def _sync_work_to_search(work: Work, db: AsyncSession) -> None:
+    """Background task to sync a work to Meilisearch."""
+    try:
+        from app.services.search import search_service
+
+        # Get author
+        author = await db.get(User, work.author_id)
+        author_name = author.display_name or author.username if author else ""
+
+        # Get tags
+        tag_result = await db.execute(
+            select(Tag.name).join(WorkTag, Tag.id == WorkTag.c.tag_id).where(WorkTag.c.work_id == work.id)
+        )
+        tag_names = [r[0] for r in tag_result.fetchall()]
+
+        doc = search_service.work_to_document(work, author_name, tag_names)
+        await search_service.index_work(doc)
+    except Exception:
+        pass  # don't fail the request if search sync fails
+
+
+async def _sync_chapter_to_search(chapter: Chapter, db: AsyncSession) -> None:
+    """Background task to sync a chapter to Meilisearch."""
+    try:
+        from app.services.search import search_service
+
+        work = await db.get(Work, chapter.work_id)
+        work_title = work.title if work else ""
+        work_slug = work.slug if work else ""
+        author_name = ""
+        if work:
+            author = await db.get(User, work.author_id)
+            author_name = author.display_name or author.username if author else ""
+
+        content_text = ""
+        if chapter.content_html:
+            content_text = re.sub(r"<[^>]+>", "", chapter.content_html)[:5000]
+
+        doc = search_service.chapter_to_document(chapter, work_title, work_slug, author_name, content_text)
+        await search_service.index_chapter(doc)
+    except Exception:
+        pass
 
 
 # === Works ===
@@ -53,6 +100,7 @@ async def list_works(
 @router.post("", response_model=WorkResponse, status_code=status.HTTP_201_CREATED)
 async def create_work(
     data: WorkCreate,
+    background_tasks: BackgroundTasks,
     db: AsyncSession = Depends(get_db),
     current_user: User = Depends(get_current_user),
 ):
@@ -70,6 +118,7 @@ async def create_work(
     db.add(work)
     await db.flush()
     await db.refresh(work)
+    background_tasks.add_task(_sync_work_to_search, work, db)
     return work
 
 
@@ -86,6 +135,7 @@ async def get_work(work_slug: str, db: AsyncSession = Depends(get_db)):
 async def update_work(
     work_slug: str,
     data: WorkUpdate,
+    background_tasks: BackgroundTasks,
     db: AsyncSession = Depends(get_db),
     current_user: User = Depends(get_current_user),
 ):
@@ -102,6 +152,7 @@ async def update_work(
 
     await db.flush()
     await db.refresh(work)
+    background_tasks.add_task(_sync_work_to_search, work, db)
     return work
 
 
@@ -175,6 +226,7 @@ async def create_chapter(
     work_slug: str,
     volume_id: str,
     data: ChapterCreate,
+    background_tasks: BackgroundTasks,
     db: AsyncSession = Depends(get_db),
     current_user: User = Depends(get_current_user),
 ):
@@ -205,4 +257,5 @@ async def create_chapter(
     db.add(chapter)
     await db.flush()
     await db.refresh(chapter)
+    background_tasks.add_task(_sync_chapter_to_search, chapter, db)
     return chapter
