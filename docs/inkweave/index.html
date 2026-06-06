@@ -3,501 +3,337 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>InkWeave (墨织) - Developer Documentation</title>
+<title>InkWeave Documentation</title>
 <style>
-  :root {
-    --bg: #ffffff; --bg2: #f8f9fa; --bg3: #f0f1f3;
-    --text: #1a1a2e; --text2: #4a4a68; --text3: #8b8ba0;
-    --accent: #6366f1; --accent-h: #4f46e5; --accent-s: #eef2ff;
-    --border: #e5e7eb; --code: #f5f3ff;
-    --red: #ef4444; --amber: #f59e0b;
-    --max-w: 960px;
-  }
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-  html { scroll-behavior: smooth; }
-  body {
-    font-family: 'Noto Sans SC', system-ui, -apple-system, sans-serif;
-    background: var(--bg); color: var(--text); line-height: 1.7;
-  }
-  /* Header */
-  .header {
-    background: linear-gradient(135deg, var(--accent), #8b5cf6);
-    color: #fff; padding: 64px 24px 56px; text-align: center;
-  }
-  .header h1 { font-size: 2.8rem; font-weight: 700; letter-spacing: -0.02em; }
-  .header p { font-size: 1.1rem; opacity: 0.9; margin-top: 12px; }
-  .header .links { margin-top: 24px; display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
-  .header .links a {
-    background: rgba(255,255,255,0.18); color: #fff; text-decoration: none;
-    padding: 8px 20px; border-radius: 8px; font-size: 0.92rem; border: 1px solid rgba(255,255,255,0.25);
-    transition: background 0.2s;
-  }
-  .header .links a:hover { background: rgba(255,255,255,0.3); }
-  /* Nav */
-  .nav {
-    position: sticky; top: 0; z-index: 100;
-    background: var(--bg); border-bottom: 1px solid var(--border);
-    padding: 0 24px; display: flex; gap: 24px; overflow-x: auto;
-    justify-content: center;
-  }
-  .nav a { color: var(--text2); text-decoration: none; font-size: 0.88rem; padding: 14px 8px; white-space: nowrap; border-bottom: 2px solid transparent; }
-  .nav a:hover, .nav a.active { color: var(--accent); border-bottom-color: var(--accent); }
-  /* Sections */
-  .section { max-width: var(--max-w); margin: 0 auto; padding: 48px 24px; }
-  .section h2 { font-size: 1.8rem; font-weight: 700; margin-bottom: 20px; color: var(--text); border-left: 4px solid var(--accent); padding-left: 16px; }
-  .section h3 { font-size: 1.25rem; font-weight: 600; margin: 28px 0 12px; color: var(--text); }
-  .section p { margin-bottom: 14px; color: var(--text2); }
-  .section ul, .section ol { margin: 8px 0 16px 24px; color: var(--text2); }
-  .section li { margin-bottom: 6px; }
-  /* Cards */
-  .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; margin-top: 20px; }
-  .card {
-    background: var(--bg2); border-radius: 12px; padding: 24px; border: 1px solid var(--border);
-    transition: box-shadow 0.2s;
-  }
-  .card:hover { box-shadow: 0 4px 20px rgba(0,0,0,0.06); }
-  .card h4 { font-size: 1rem; font-weight: 600; margin-bottom: 8px; }
-  .card p { font-size: 0.88rem; color: var(--text3); margin: 0; }
-  /* Code */
-  code {
-    background: var(--code); padding: 2px 7px; border-radius: 4px;
-    font-family: 'JetBrains Mono', 'Fira Code', monospace; font-size: 0.85em; color: var(--accent-h);
-  }
-  pre {
-    background: #1a1a2e; color: #e8e8f0; padding: 20px 24px; border-radius: 10px;
-    overflow-x: auto; font-size: 0.85rem; line-height: 1.6; margin: 16px 0;
-  }
-  pre code { background: none; color: inherit; padding: 0; }
-  /* Badge */
-  .badge {
-    display: inline-block; padding: 3px 10px; border-radius: 6px; font-size: 0.78rem; font-weight: 600;
-  }
-  .badge-g { background: #dcfce7; color: #166534; }
-  .badge-b { background: var(--accent-s); color: var(--accent); }
-  .badge-a { background: #fef3c7; color: #92400e; }
-  /* Table */
-  table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 0.9rem; }
-  th, td { padding: 10px 14px; border: 1px solid var(--border); text-align: left; }
-  th { background: var(--bg2); font-weight: 600; }
-  /* Links */
-  .section a { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; }
-  .section a:hover { color: var(--accent-h); }
-  /* Footer */
-  .footer { text-align: center; padding: 40px 24px; color: var(--text3); font-size: 0.82rem; border-top: 1px solid var(--border); }
-  /* Mobile */
-  @media (max-width: 640px) {
-    .header h1 { font-size: 2rem; }
-    .nav { gap: 8px; }
-    .nav a { font-size: 0.8rem; padding: 12px 4px; }
-  }
+:root{--bg:#fff;--bg2:#f8f9fa;--bg3:#f0f1f3;--text:#1a1a2e;--text2:#4a4a68;--text3:#8b8ba0;--accent:#6366f1;--accent-h:#4f46e5;--accent-s:#eef2ff;--border:#e5e7eb;--code:#f5f3ff;--max-w:960px}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Noto Sans SC',system-ui,-apple-system,sans-serif;background:var(--bg);color:var(--text);line-height:1.7}
+.header{background:linear-gradient(135deg,var(--accent),#8b5cf6);color:#fff;padding:64px 24px 56px;text-align:center}
+.header h1{font-size:2.8rem;font-weight:700;letter-spacing:-0.02em}
+.header p{font-size:1.1rem;opacity:0.9;margin-top:12px}
+.header .links{margin-top:24px;display:flex;gap:16px;justify-content:center;flex-wrap:wrap}
+.header .links a{background:rgba(255,255,255,0.18);color:#fff;text-decoration:none;padding:8px 20px;border-radius:8px;font-size:0.92rem;border:1px solid rgba(255,255,255,0.25);transition:background 0.2s}
+.header .links a:hover{background:rgba(255,255,255,0.3)}
+.lang-switch{position:fixed;top:16px;right:16px;z-index:200;display:flex;gap:4px;background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:4px;box-shadow:0 2px 12px rgba(0,0,0,0.1)}
+.lang-switch button{border:none;background:none;padding:6px 12px;border-radius:6px;cursor:pointer;font-size:0.82rem;font-weight:600;color:var(--text3);transition:all 0.15s}
+.lang-switch button.active{background:var(--accent);color:#fff}
+.lang-switch button:hover:not(.active){background:var(--bg2)}
+.nav{position:sticky;top:0;z-index:100;background:var(--bg);border-bottom:1px solid var(--border);padding:0 24px;display:flex;gap:24px;overflow-x:auto;justify-content:center}
+.nav a{color:var(--text2);text-decoration:none;font-size:0.88rem;padding:14px 8px;white-space:nowrap;border-bottom:2px solid transparent}
+.nav a:hover,.nav a.active{color:var(--accent);border-bottom-color)}
+.section{max-width:var(--max-w);margin:0 auto;padding:48px 24px}
+.section h2{font-size:1.8rem;font-weight:700;margin-bottom:20px;border-left:4px solid var(--accent);padding-left:16px}
+.section h3{font-size:1.25rem;font-weight:600;margin:28px 0 12px}
+.section p{margin-bottom:14px;color:var(--text2)}
+.section ul,.section ol{margin:8px 0 16px 24px;color:var(--text2)}
+.section li{margin-bottom:6px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px;margin-top:20px}
+.card{background:var(--bg2);border-radius:12px;padding:24px;border:1px solid var(--border);transition:box-shadow 0.2s}
+.card:hover{box-shadow:0 4px 20px rgba(0,0,0,0.06)}
+.card h4{font-size:1rem;font-weight:600;margin-bottom:8px}
+.card p{font-size:0.88rem;color:var(--text3);margin:0}
+code{background:var(--code);padding:2px 7px;border-radius:4px;font-family:'JetBrains Mono','Fira Code',monospace;font-size:0.85em;color:var(--accent-h)}
+pre{background:#1a1a2e;color:#e8e8f0;padding:20px 24px;border-radius:10px;overflow-x:auto;font-size:0.85rem;line-height:1.6;margin:16px 0}
+pre code{background:none;color:inherit;padding:0}
+.badge{display:inline-block;padding:3px 10px;border-radius:6px;font-size:0.78rem;font-weight:600}
+.badge-g{background:#dcfce7;color:#166534}
+.badge-b{background:var(--accent-s);color:var(--accent)}
+.badge-a{background:#fef3c7;color:#92400e}
+table{width:100%;border-collapse:collapse;margin:16px 0;font-size:0.9rem}
+th,td{padding:10px 14px;border:1px solid var(--border);text-align:left}
+th{background:var(--bg2);font-weight:600}
+.section a{color:var(--accent);text-decoration:underline;text-underline-offset:3px}
+.section a:hover{color:var(--accent-h)}
+.footer{text-align:center;padding:40px 24px;color:var(--text3);font-size:0.82rem;border-top:1px solid var(--border)}
+@media(max-width:640px){.header h1{font-size:2rem}.nav{gap:8px}.nav a{font-size:0.8rem;padding:12px 4px}.lang-switch{top:auto;bottom:16px;right:16px}}
+[data-i18n]{display:none}
+[data-i18n].show{display:block}
+span[data-i18n],a[data-i18n],button[data-i18n]{display:none}
+span[data-i18n].show,a[data-i18n].show,button[data-i18n].show{display:inline}
+tr[data-i18n]{display:none}
+tr[data-i18n].show{display:table-row}
 </style>
 </head>
 <body>
 
+<div class="lang-switch">
+  <button onclick="setLang('zh')" id="btn-zh" class="active">中文</button>
+  <button onclick="setLang('en')" id="btn-en">English</button>
+  <button onclick="setLang('ja')" id="btn-ja">日本語</button>
+</div>
+
 <header class="header">
-  <h1>InkWeave (墨织) Documentation</h1>
-  <p>A Structured Narrative Platform — Build Digital Libraries Where Stories Breathe</p>
+  <h1>InkWeave Documentation</h1
+  <p data-i18n="zh" class="show">墨织 — 面向创作者与读者的结构化叙事平台</p>
+  <p data-i18n="en">A Structured Narrative Platform for Creators and Readers</p>
+  <p data-i18n="ja">クリエイターと読者のための構造化ナラティブプラットフォーム</p>
   <div class="links">
-    <a href="https://inkweave.demo.vesper36.cc" target="_blank">Live Demo</a>
+    <a href="https://inkweave.demo.vesper36.cc" target="_blank" data-i18n="zh" class="show">Demo</a>
+    <a href="https://inkweave.demo.vesper36.cc" target="_blank" data-i18n="en">Live Demo</a>
+    <a href="https://inkweave.demo.vesper36.cc" target="_blank" data-i18n="ja">デモ</a>
     <a href="https://github.com/Vesper36/inkweave" target="_blank">GitHub</a>
-    <a href="https://inkweave.demo.vesper36.cc/api/health" target="_blank">API Health</a>
   </div>
 </header>
 
 <nav class="nav" id="nav">
-  <a href="#overview">Overview</a>
-  <a href="#architecture">Architecture</a>
-  <a href="#api">API Reference</a>
-  <a href="#deployment">Deployment</a>
-  <a href="#data-model">Data Model</a>
-  <a href="#development">Development</a>
-  <a href="#faq">FAQ</a>
+  <a href="#overview" data-i18n="zh" class="show">概述</a>
+  <a href="#overview" data-i18n="en">Overview</a>
+  <a href="#overview" data-i18n="ja">概要</a>
+  <a href="#architecture" data-i18n="zh" class="show">架构</a>
+  <a href="#architecture" data-i18n="en">Architecture</a>
+  <a href="#architecture" data-i18n="ja">アーキテクチャ</a>
+  <a href="#api" data-i18n="zh" class="show">API</a>
+  <a href="#api" data-i18n="en">API</a>
+  <a href="#api" data-i18n="ja">API</a>
+  <a href="#deployment" data-i18n="zh" class="show">部署</a>
+  <a href="#deployment" data-i18n="en">Deployment</a>
+  <a href="#deployment" data-i18n="ja">デプロイ</a>
+  <a href="#data" data-i18n="zh" class="show">数据模型</a>
+  <a href="#data" data-i18n="en">Data Model</a>
+  <a href="#data" data-i18n="ja">データモデル</a>
+  <a href="#dev" data-i18n="zh" class="show">开发</a>
+  <a href="#dev" data-i18n="en">Development</a>
+  <a href="#dev" data-i18n="ja">開発</a>
 </nav>
 
 <!-- OVERVIEW -->
 <section class="section" id="overview">
-  <h2>1. Project Overview</h2>
-  <p>
-    <strong>InkWeave (墨织)</strong> is a structured narrative platform designed for long-form storytelling,
-    fan fiction derivatives, and interactive experimental texts. It offers volume-level management,
-    sandboxed MDX rendering, multi-theme reading engines, and a seamless cross-device experience.
-  </p>
+  <h2 data-i18n="zh" class="show">1. 项目概述</h2>
+  <h2 data-i18n="en">1. Project Overview</h2>
+  <h2 data-i18n="ja">1. プロジェクト概要</h2>
+  <p data-i18n="zh" class="show"><strong>墨织 InkWeave</strong> 是一个面向创作者与读者的结构化叙事平台，为长篇连载、同人衍生和互动文本提供卷册管理、沙箱渲染、多主题阅读引擎和全端无缝体验。</p>
+  <p data-i18n="en"><strong>InkWeave</strong> is a structured narrative platform designed for long-form storytelling, fan fiction, and interactive texts. It offers volume-level management, sandboxed MDX rendering, multi-theme reading engines, and-device experience.</p>
+  <p data-i18n="ja"><strong>墨織 InkWeave</strong> は長編連載、ファンフィクション、インタラクティブテキストのために設計された構造化ナラティブプラットフォームです。巻レベル管理、サンドボックスMDXレンダリング、マルチテーマリーディングエンジンを提供します。</p>
 
-  <div style="margin-top:20px; display:flex; gap:12px; flex-wrap:wrap;">
+  <div style="margin-top:20px;display:flex;gap:12px;flex-wrap:wrap">
     <span class="badge badge-g">v0.1.0-alpha</span>
     <span class="badge badge-b">Next.js 16 + FastAPI</span>
     <span class="badge badge-a">Docker Compose</span>
   </div>
 
-  <h3>Quick Links</h3>
+  <h3 data-i18n="zh" class="show">快速链接</h3>
+  <h3 data-i18n="en">Quick Links</h3>
+  <h3 data-i18n="ja">クイックリンク</h3>
   <div class="grid">
-    <div class="card">
-      <h4>Demo Site</h4>
-      <p><a href="https://inkweave.demo.vesper36.cc" target="_blank">inkweave.demo.vesper36.cc</a> — Live project preview</p>
-    </div>
-    <div class="card">
-      <h4>Documentation</h4>
-      <p><a href="https://inkweave.docs.vesper36.cc" target="_blank">inkweave.docs.vesper36.cc</a> — This page</p>
-    </div>
-    <div class="card">
-      <h4>GitHub</h4>
-      <p><a href="https://github.com/Vesper36/inkweave" target="_blank">github.com/Vesper36/inkweave</a></p>
-    </div>
-    <div class="card">
-      <h4>API Docs</h4>
-      <p><a href="https://inkweave.demo.vesper36.cc/api/health" target="_blank">/api/health</a> — Backend health check</p>
-    </div>
+    <div class="card"><h4 data-i18n="zh" class="show">Demo</h4><h4 data-i18n="en">Demo</h4><h4 data-i18n="ja">デモ</h4><p><a href="https://inkweave.demo.vesper36.cc" target="_blank">inkweave.demo.vesper36.cc</a></p></div>
+    <div class="card"><h4 data-i18n="zh" class="show">文档</h4><h4 data-i18n="en">Documentation</h4><h4 data-i18n="ja">ドキュメント</h4><p><a href="https://inkweave.docs.vesper36.cc" target="_blank">inkweave.docs.vesper36.cc</a></p></div>
+    <div class="card"><h4>GitHub</h4><p><a href="https://github.com/Vesper36/inkweave" target="_blank">github.com/Vesper36/inkweave</a></p></div>
+    <div class="card"><h4>API</h4><p><a href="https://inkweave.demo.vesper36.cc/api/health" target="_blank">/api/health</a></p></div>
   </div>
 
-  <h3>Core Features</h3>
+  <h3 data-i18n="zh" class="show">核心功能</h3>
+  <h3 data-i18n="en">Core Features</h3>
+  <h3 data-i18n="ja">コア機能</h3>
   <div class="grid">
-    <div class="card"><h4>Volume & Chapter Tree</h4><p>3-level hierarchy: Work → Volume → Chapter. Drag-and-drop sorting, batch import/export.</p></div>
-    <div class="card"><h4>Multi-Theme Engine</h4><p>4 presets: Light, Midnight, Parchment, Eye Care. CSS Variables, localStorage + cloud sync.</p></div>
-    <div class="card"><h4>MDX Content Pipeline</h4><p>Markdown base + HTML/CSS/JS sandbox. Shiki highlighting, collapsible annotations, interactive components.</p></div>
-    <div class="card"><h4>Tag & Search</h4><p>Multi-label tagging, Meilisearch full-text with pinyin/typo tolerance, faceted filtering.</p></div>
-    <div class="card"><h4>Reader Settings</h4><p>Font size (14-24px), line height, reading progress persistence, offline cache.</p></div>
-    <div class="card"><h4>Auth & RBAC</h4><p>JWT auth, roles: author/editor/moderator/admin. Draft/version control.</p></div>
+    <div class="card"><h4 data-i18n="zh" class="show">卷册结构</h4><h4 data-i18n="en">Volume Structure</h4><h4 data-i18n="ja">巻構造</h4><p data-i18n="zh" class="show">三级树状结构：作品→卷→章。拖拽排序、批量导入导出、跨卷引用。</p><p data-i18n="en">3-level tree: Work→Volume→Chapter. Drag-and-drop sorting, batch import/export, cross-volume references.</p><p data-i18n="ja">3レベルツリー：作品→巻→章。ドラッグ&ドロップ並べ替え、バッチインポート。</p></div>
+    <div class="card"><h4 data-i18n="zh" class="show">多主题引擎</h4><h4 data-i18n="en"Theme Engine</h4><h4 data-i18n="ja">テーマエンジン</h4><p data-i18n="zh" class="show">4 套预设主题：晨光白、深夜黑、羊皮纸、护眼绿。CSS Variables 全局切换。</p><p data-i18n="en">4 presets: Light, Midnight, Parchment, Eye Care. CSS Variables with localStorage sync.</p><p data-i18n="ja">4つのプリセット：ライト、ミッドナイト、パーチメント、アイケア。CSS Variables でグローバル切替。</p></div>
+    <div class="card"><h4 data-i18n="zh" class="show">富媒体内容</h4><h4 data-i18n="en">Rich Content</h4><h4 data-i18n="ja">リッチコンテンツ</h4><p data-i18n="zh" class="show">Markdown + HTML/CSS/JS 沙箱。代码高亮、可折叠注释、交互组件。</p><p data-i18n="en">Markdown + sandboxed HTML/CSS/JS. Code highlighting, collapsible notes, interactive components.</p><p data-i18n="ja">Markdown + サンドボックスHTML/CSS/JS。コードハイライト、折りたたみノート。</p></div>
+    <div class="card"><h4 data-i18n="zh" class="show">标签搜索</h4><h4 data-i18n="en">Tags & Search</h4><h4 data-i18n="ja">タグ&検索</h4><p data-i18n="zh" class="show">多级标签体系，Meilisearch 全文检索，拼音/容错，分面过滤。</p><p data-i18n="en">Multi-label tagging, Meilisearch full-text with typo tolerance, faceted filtering.</p><p data-i18n="ja">マルチラベルタグ、Meilisearch全文検索、タイпотенダシー、ファセットフィルタリング。</p></div>
+    <div class="card"><h4 data-i18n="zh" class="show">阅读设置</h4><h4 data-i18n="en">Reader Settings</h4><h4 data-i18n="ja">リーダー設定</h4><p data-i18n="zh" class="show">字号 14-24px 无级调节，行高控制，阅读进度持久化。</p><p data-i18n="en">Font size 14-24px, line height control, reading progress persistence.</p><p data-i18n="ja">フォントサイズ14-24px、行高さ制御、読書進捗の永続化。</p></div>
+    <div class="card"><h4 data-i18n="zh" class="show">权限系统</h4><h4 data-i18n="en">Auth & RBAC</h4><h4 data-i18n="ja">認証&RBAC</h4><p data-i18n="zh" class="show">JWT角色：作者/编辑/版主/管理员。草稿/版本控制。</p><p data-i18n="en">JWT auth, roles: author/editor/moderator/admin. Draft/version control.</p><p data-i18n="ja">JWT認証、ロール：著者/編集者/モデレータ/管理者。ドラフト/バージョン管理。</p></div>
   </div>
 </section>
 
 <!-- ARCHITECTURE -->
-<section class="section" id="architecture" style="background:var(--bg2); max-width:100%;">
-  <div style="max-width:var(--max-w); margin:0 auto;">
-  <h2>2. System Architecture</h2>
+<section class="section" id="architecture" style="background:var(--bg2);max-width:100%">
+  <div style="max-width:var(--max-w);margin:0 auto">
+  <h2 data-i18n="zh" class="show">2. 系统架构</h2>
+  <h2 data-i18n="en">2. System Architecture</h2>
+  <h2 data-i18n="ja">2. システムアーキテクチャ</h2>
 
-  <h3>Tech Stack</h3>
+  <h3 data-i18n="zh" class="show">技术栈</h3>
+  <h3 data-i18n="en">Tech Stack</h3>
+  <h3 data-i18n="ja">技術スタック</h3>
   <table>
-    <tr><th>Layer</th><th>Technology</th><th>Version</th></tr>
-    <tr><td>Frontend</td><td>Next.js (App Router) + React + Tailwind CSS + Radix UI</td><td>16.2 / 19 / 4</td></tr>
-    <tr><td>State</td><td>Zustand + TanStack React Query</td><td>5 / 5</td></tr>
-    <tr><td>Animation</td><td>Framer Motion</td><td>12</td></tr>
+    <tr><th data-i18n="zh" class="show">层级</th><th data-i18n="en">Layer</th><th data-i18n="ja">レイヤー</th><th>Technology</th><th>Version</th></tr>
+    <tr><td>Frontend</td><td>Next.js (App Router) + React + Tailwind + Radix UI</td><td>16 / 19 / 4</td></tr>
     <tr><td>Backend</td><td>FastAPI + Uvicorn</td><td>0.136 / 0.49</td></tr>
     <tr><td>ORM</td><td>SQLAlchemy (async) + Alembic</td><td>2.0 / 1.18</td></tr>
     <tr><td>Database</td><td>PostgreSQL + Redis</td><td>16 / 7</td></tr>
     <tr><td>Search</td><td>Meilisearch</td><td>1.7</td></tr>
-    <tr><td>Deploy</td><td>Docker Compose + Nginx + Certbot</td><td>-</td></tr>
+    <tr><td>Deploy</td><td>Docker Compose + Nginx</td><td>-</td></tr>
   </table>
 
-  <h3>Network Topology</h3>
-  <pre><code>
-    Browser
-      |
-  [Nginx :443]  (reverse proxy)
-      |
-      ├── /api/*  →  backend:51638 (FastAPI)
-      └── /*      →  frontend:51637 (Next.js SSR)
-                        |
-                        ├──  postgres:5433  (database)
-                        ├──  redis:6379     (session/cache)
-                        └──  meilisearch:7701 (search)
-  </code></pre>
-
-  <h3>Directory Structure</h3>
-  <pre><code>
-  inkweave/
-  ├── frontend/                  Next.js 14 application
-  │   └── src/
-  │       ├── app/               App Router pages (6 routes)
-  │       │   ├── browse/        Browse / search works
-  │       │   ├── tags/          Tag cloud
-  │       │   ├── write/         Writing dashboard
-  │       │   └── work/[slug]/   Work detail + chapter reader
-  │       ├── components/        UI components (Header, Footer, etc.)
-  │       ├── lib/               API client, themes, utilities
-  │       └── stores/            Zustand stores (auth, reader, sidebar)
-  ├── backend/                   FastAPI application
-  │   ├── app/
-  │   │   ├── models/            SQLAlchemy ORM (6 tables)
-  │   │   ├── schemas/           Pydantic validation schemas
-  │   │   ├── routers/           API endpoints (auth, works, tags)
-  │   │   ├── core/              Auth, security, utilities
-  │   │   └── services/          Business logic layer
-  │   ├── alembic/               Database migrations
-  │   └── scripts/               Init / seed scripts
-  ├── docker/                    Nginx configs
-  └── docker-compose.prod.yml    Production deployment
-  </code></pre>
+  <h3 data-i18n="zh" class="show">端口映射</h3>
+  <h3 data-i18n="en">Port Mapping</h3>
+  <h3 data-i18n="ja">ポートマッピング</h3>
+  <table>
+    <tr><th data-i18n="zh" class="show">服务</th><th data-i18n="en">Service</th><th data-i18n="ja">サービス</th><th data-i18n="zh" class="show">端口</th><th data-i18n="en">Port</th><th data-i18n="ja">ポート</th></tr>
+    <tr><td data-i18n="zh" class="show">前端</td><td data-i18n="en">Frontend</td><td data-i18n="ja">フロントエンド</td><td>51637</td></tr>
+    <tr><td data-i18n="zh" class="show">后端</td><td data-i18n="en">Backend</td><td data-i18n="ja">バックエンド</td><td>51638</td></tr>
+    <tr><td>PostgreSQL</td><td>PostgreSQL</td><td>PostgreSQL</td><td>5433</td></tr>
+    <tr><>Meilisearch</td><td>Meilisearch</td><td>Meilisearch</td><td>7701</td></tr>
+    <tr><td>Redis</td><td>Redis</td><td>Redis</td><td>6379</td></tr>
+  </table>
   </div>
 </section>
 
-<!-- API REFERENCE -->
+<!-- API -->
 <section class="section" id="api">
-  <h2>3. API Reference</h2>
+  <h2 data-i18n="zh" class="show">3. API 参考</h2>
+  <h2 data-i18n="en">3. API Reference</h2>
+  <h2 data-i18n="ja">3. APIリファレンス</h2>
   <p>Base URL: <code>https://inkweave.demo.vesper36.cc/api</code></p>
 
-  <h3>Authentication</h3>
+  <h3 data-i18n="zh" class="show">认证</h3>
+  <h3 data-i18n="en">Authentication</h3>
+  <h3 data-i18n="ja">認証</h3>
   <table>
-    <tr><th>Method</th><th>Endpoint</th><th>Auth</th><th>Description</th></tr>
-    <tr><td>POST</td><td><code>/auth/register</code></td><td>No</td><td>Register new user</td></tr>
-    <tr><td>POST</td><td><code>/auth/login</code></td><td>No</td><td>Login, returns JWT</td></tr>
-    <tr><td>GET</td><td><code>/auth/me</code></td><td>Bearer</td><td>Get current user profile</td></tr>
+    <tr><th>Method</th><th>Endpoint</th><th data-i18n="zh" class="show">描述</th><th data-i18n="en">Description</th><th data-i18n="ja">説明</th></tr>
+    <tr><td>POST</td><td><code>/auth/register</code></td><td data-i18n="zh" class="show">注册新用户</td><td data-i18n="en">Register new user</td><td data-i18n="ja">新規ユーザー登録</td></tr>
+    <tr><td>POST</td><td><code>/auth/login</code></td><td data-i18n="zh" class="show">登录，返回 JWT</td><td data-i18n="en">Login, returns JWT</td><td data-i18n="ja">ログイン、JWT返却</td></tr>
+    <tr><td>GET</td><td><code>/auth/me</code></td><td data-i18n="zh" class="show">获取当前用户</td><td data-i18n="en">Get current user</td><td data-i18n="ja">現在のユーザー取得</td></tr>
   </table>
 
-  <h3>Works</h3>
+  <h3 data-i18n="zh" class="show">作品</h3>
+  <h3 data-i18n="en">Works</h3>
+  <h3 data-i18n="ja">作品</h3>
   <table>
-    <tr><th>Method</th><th>Endpoint</th><th>Auth</th><th>Description</th></tr>
-    <tr><td>GET</td><td><code>/works</code></td><td>No</td><td>List works ( page, page_size, status, sort)</td></tr>
-    <tr><td>POST</td><td><code>/works</code></td><td>Bearer</td><td>Create new work</td></tr>
-    <tr><td>GET</td><td><code>/works/{slug}</code></td><td>No</td><td>Get work detail with volumes</td></tr>
-    <tr><td>PUT</td><td><code>/works/{slug}</code></td><td>Bearer</td><td>Update work metadata</td></tr>
+    <tr><th>Method</th><th>Endpoint</th><th data-i18n="zh" class="show">描述</th><th data-i18n="en">Description</th><th data-i18n="ja">説明</th></tr>
+    <tr><td>GET</td><td><code>/works</code></td><td data-i18n="zh" class="show">作品列表（分页）</td><td data-i18n="en">List works (paginated)</td><td data-i18n="ja">作品一覧（ページネーション）</td></tr>
+    <tr><td>POST<><td><code>/works</code></td><td data-i18n="zh" class="show">创建作品</td><td data-i18n="en">Create work</td><td data-i18n="ja">作品作成</td></tr>
+    <tr><td>GET</td><td><code>/works/{slug}</code></td><td data-i18n="zh" class="show">作品详情</td><td data-i18n="en">Get work detail</td><td data-i18n="ja">作品詳細</td></tr>
+    <tr><td>PUT</td><td><code>/works/{slug}</code></td><td data-i18n="zh" class="show">更新作品</td><td data-i18n="en">Update work</td><td data-i18n="ja">作品更新</td></tr>
   </table>
 
-  <h3>Volumes & Chapters</h3>
+  <h3 data-i18n="zh" class="show">卷章</h3>
+  <h3 data-i18n="en">Volumes & Chapters</h3>
+  <h3 data-i18n="ja">巻&章</h3>
   <table>
-    <tr><th>Method</th><th>Endpoint</th><th>Auth</th><th>Description</th></tr>
-    <tr><td>GET</td><td><code>/works/{slug}/volumes</code></td><td>No</td><td>List volumes for a work</td></tr>
-    <tr><td>POST</td><td><code>/works/{slug}/volumes</code></td><td>Bearer</td><td>Create volume</td></tr>
-    <tr><td>GET</td><td><code>/works/{slug}/chapters</code></td><td>No</td><td>List all chapters</td></tr>
-    <tr><td>GET</td><td><code>/works/{slug}/chapters/{ch}</code></td><td>No</td><td>Get chapter content</td></tr>
-    <tr><td>POST</td><td><code>/works/{slug}/volumes/{id}/chapters</code></td><td>Bearer</td><td>Create chapter</td></tr>
+    <tr><th>Method</th><th>Endpoint</th><th data-i18n="zh" class="show">描述</th><th data-i18n="en">Description</th><th data-i18n="ja">説明</th></tr>
+    <tr><td>GET</td><td><code>/works/{slug}/volumes</code></td><td data-i18n="zh" class="show">卷列表</td><td data-i18n="en">List volumes</td><td data-i18n="ja">巻一覧</td></tr>
+    <tr><td>POST</td><td><code>/works/{slug}/volumes</code></td><td data-i18n="zh" class="show">创建卷</td><td data-i18n="en">Create volume</td><td data-i18n="ja">巻作成</td></tr>
+    <tr><td>GET</td><td><code>/works/{slug}/chapters</code></td><td data-i18n="zh" class="show">章列表</td><td data-i18n="en">List chapters</td><td data-i18n="ja">章一覧</td></tr>
+    <tr><td>GET</td><td><code>/works/{slug}/chapters/{ch}</code></td><td data-i18n="zh" class="show">章节内容</td><td data-i18n="en">Get chapter content</td><td data-i18n="ja">章内容取得</td></tr>
   </table>
 
-  <h3>Tags</h3>
-  <table>
-    <tr><th>Method</th><th>Endpoint</th><th>Auth</th><th>Description</th></tr>
-    <tr><td>GET</td><td><code>/tags</code></td><td>No</td><td>List tags ( category, search, limit)</td></tr>
-    <tr><td>POST</td><td><code>/tags</code></td><td>Bearer</td><td>Create tag</td></tr>
-    <tr><td>GET</td><td><code>/tags/{slug}</code></td><td>No</td><td>Get tag by slug</td></tr>
-  </table>
-
-  <h3>Example: Login & Fetch Works</h3>
+  <h3 data-i18n="zh" class="show">示例</h3>
+  <h3 data-i18n="en">Example</h3>
+  <h3 data-i18n="ja">サンプル</h3>
   <pre><code>
   # Login
   curl -X POST "https://inkweave.demo.vesper36.cc/api/auth/login" \
     -d "username=admin&password=admin123"
 
-  # Response: { "access_token": "...", "token_type": "bearer" }
-
   # List works
   curl "https://inkweave.demo.vesper36.cc/api/works?page=1&sort=view_count"
-
-  # Seed accounts: admin/admin123, evelync/author123, starwriter/author123
+ 测试账号: admin/admin123, evelync/author123
+  # テストアカウント: admin/admin123, evelync/author123
   </code></pre>
 </section>
 
 <!-- DEPLOYMENT -->
-<section class="section" id="deployment" style="background:var(--bg2); max-width:100%;">
-  <div style="max-width:var(--max-w); margin:0 auto;">
-  <h2>4. Deployment Guide</h2>
+<section class="section" id="deployment" style="background:var(--bg2);max-width:100%">
+  <div style="max-width:var(--max-w);margin:0 auto">
+  <h2 data-i18n="zh" class="show">4. 部署指南</h2>
+  <h2 data-i18n="en">4. Deployment Guide</h2>
+  <h2 data-i18n="ja">4. デプロイガイド</h2>
 
-  <h3>Server Requirements</h3>
+  <h3 data-i18n="zh" class="show">环境要求</h3>
+  <h3 data-i18n="en">Requirements</h3>
+  <h3 data-i18n="ja">要件</h3>
   <ul>
     <li>OS: Debian 12 / Ubuntu 22.04+ (x86_64)</li>
     <li>Docker 29+ & Docker Compose v5+</li>
-    <li>Nginx with Certbot (SSL)</li>
+    <li>Nginx + Certbot (SSL)</li>
     <li>Minimum: 2GB RAM, 20GB disk</li>
   </ul>
 
-  <h3>Port Mapping (Production)</h3>
-  <table>
-    <tr><th>Service</th><th>Host Port</th><th>Container Port</th><th>Access</th></tr>
-    <tr><td>Frontend (Next.js)</td><td>51637</td><td>3000</td><td>127.0.0.1 only</td></tr>
-    <tr><td>Backend (FastAPI)</td><td>51638</td><td>8000</td><td>127.0.0.1 only</td></tr>
-    <tr><td>Meilisearch</td><td>7701</td><td>7700</td><td>127.0.0.1 only</td></tr>
-    <tr><td>PostgreSQL</td><td>5433</td><td>5432</td><td>127.0.0.1 only</td></tr>
-    <tr><td>Redis</td><td>6379</td><td>-</td><td>Host service</td></tr>
-    <tr><td>Docs (Nginx)</td><td>40001</td><td>-</td><td>127.0.0.1 only</td></tr>
-  </table>
-
-  <h3>Deploy from Scratch</h3>
+  <h3 data-i18n="zh" class="show">快速部署</h3>
+  <h3 data-i18n="en">Quick Deploy</h3>
+  <h3 data-i18n="ja">クイックデプロイ</h3>
   <pre><code>
-  # 1. Clone repository
-  cd /opt
-  git clone https://github.com/Vesper36/inkweave.git
+  # Clone
+  cd /opt && git clone https://github.com/Vesper36/inkweave.git
   cd inkweave
 
-  # 2. Configure environment
-  # .env is pre-configured; edit if needed
-  cat .env
+  # Configure
+  cp .env.example .env   # edit as needed
 
-  # 3. Start services
+  # Start
   docker compose -p inkweave -f docker-compose.prod.yml up -d
 
-  # 4. Check status
-  docker compose -p inkweave -f docker-compose.prod.yml ps
+  # Verify
   curl http://127.0.0.1:51638/api/health
-
-  # 5. Verify frontend
-  curl http://127.0.0.1:51637/ | head -5
   </code></pre>
 
-  <h3>Real-Time Update (Git Webhook)</h3>
+  <h3 data-i18n="zh" class="show">自动更新</h3>
+  <h3 data-i18n="en">Auto-Update</h3>
+  <h3 data-i18n="ja">自動更新</h3>
   <pre><code>
-  # Pull latest code and restart
-  cd /opt/inkweave
-  git pull origin main
-  docker compose -p inkweave -f docker-compose.prod.yml up -d --build
+  # Cron (every 5 min)
+  */5 * * * * /opt/inkweave/deploy.sh >> /opt/inkweave/deploy.log 2>&1
 
-  # Or set up auto-deploy with a cron job:
-  # */5 * * * * cd /opt/inkweave && git pull && docker compose -p inkweave -f docker-compose.prod.yml up -d
-  </code></pre>
-
-  <h3>Nginx Configuration</h3>
-  <pre><code>
-  # /etc/nginx/sites-enabled/inkweave
-  server {
-      server_name inkweave.demo.vesper36.cc;
-
-      location /api/ {
-          proxy_pass http://127.0.0.1:51638/api/;
-          proxy_set_header Host $host;
-          proxy_set_header X-Forwarded-Proto $scheme;
-      }
-
-      location / {
-          proxy_pass http://127.0.0.1:51637;
-          proxy_set_header Host $host;
-          proxy_http_version 1.1;
-          proxy_set_header Upgrade $http_upgrade;
-          proxy_set_header Connection "upgrade";
-      }
-
-      listen 443 ssl;
-      ssl_certificate /etc/letsencrypt/live/inkweave.demo.vesper36.cc/fullchain.pem;
-      ssl_certificate_key /etc/letsencrypt/live/inkweave.demo.vesper36.cc/privkey.pem;
-  }
-  </code></pre>
-
-  <h3>Docs Site Deployment</h3>
-  <pre><code>
-  # /etc/nginx/sites-enabled/inkweave-docs
-  server {
-      server_name inkweave.docs.vesper36.cc;
-
-      location / {
-          root /opt/docs/inkweave;
-          index index.html;
-      }
-
-      listen 443 ssl;
-      ssl_certificate /etc/letsencrypt/live/inkweave.docs.vesper36.cc/fullchain.pem;
-      ssl_certificate_key /etc/letsencrypt/live/inkweave.docs.vesper36.cc/privkey.pem;
-  }
+  # GitHub Webhook
+  URL: https://inkweave.demo.vesper36.cc/webhook/deploy
+  Secret: inkweave_webhook_2026
+  Events: Just the push event
   </code></pre>
   </div>
 </section>
 
 <!-- DATA MODEL -->
-<section class="section" id="data-model">
-  <h2>5. Data Model</h2>
-  <p>PostgreSQL schema with 6 tables. All primary keys are UUIDv4.</p>
-
+<section class="section" id="data">
+  <h2 data-i18n="zh" class="show">5. 数据模型</h2>
+  <h2 data-i18n="en">5. Data Model</h2>
+  <h2 data-i18n="ja">5. データモデル</h2>
+  <p data-i18n="zh" class=show">PostgreSQL 6 张表，主键均为 UUIDv4。</p>
+  <p data-i18n="en">PostgreSQL with 6 tables. All PKs are UUIDv4.</p>
+  <p data-i18n="ja">PostgreSQL 6テーブル。全PKはUUIDv4。</p>
   <pre><code>
-  users
-    ├── id (UUID, PK)
-    ├── username (VARCHAR 50, UNIQUE)
-    ├── email (VARCHAR 255, UNIQUE)
-    ├── hashed_password, display_name, avatar_url, bio
-    ├── role: 'author' | 'editor' | 'moderator' | 'admin'
-    └── timestamps
-
-  works
-    ├── id (UUID, PK)
-    ├── author_id (FK → users.id)
-    ├── title, slug (UNIQUE), description, cover_url
-    ├── status: 'draft' | 'reviewing' | 'published' | 'archived'
-    ├── word_count, view_count, favorite_count
-    ├── content_warning, rating: 'general' | 'teen' | 'mature'
-    ├── language
-    └── timestamps + published_at
-
-  volumes
-    ├── id (UUID, PK)
-    ├── work_id (FK → works.id, CASCADE)
-    ├── title, description, sort_order
-    └── created_at
-
-  chapters
-    ├── id (UUID, PK)
-    ├── volume_id (FK → volumes.id, CASCADE)
-    ├── work_id (FK → works.id, CASCADE)
-    ├── title, slug, content (JSONB), content_html (TEXT)
-    ├── status, word_count, sort_order, version
-    ├── author_note
-    └── timestamps + published_at
-
-  tags
-    ├── id (UUID, PK)
-    ├── name (UNIQUE), slug (UNIQUE)
-    ├── color (HEX), category
-    ├── usage_count (denormalized)
-    └── created_at
-
-  work_tags (M2M association)
-    ├── work_id (FK → works.id)
-    └── tag_id (FK → tags.id)
+  users           → id, username, email, hashed_password, display_name, role
+  works           → id, author_id(FK), title, slug, description, status, rating
+  volumes         → id, work_id(FK), title, sort_order
+  chapters        → id, volume_id(FK), work_id(FK), title, content(JSONB), word_count
+  tags            → id, name, slug, color, category, usage_count
+  work_tags       → work_id(FK), tag_id(FK)
   </code></pre>
 </section>
 
 <!-- DEVELOPMENT -->
-<section class="section" id="development" style="background:var(--bg2); max-width:100%;">
-  <div style="max-width:var(--max-w); margin:0 auto;">
-  <h2>6. Development Guide</h2>
-
-  <h3>Local Setup</h3>
+<section class="section" id="dev" style="background:var(--bg2);max-width:100%">
+  <div style="max-width:var(--max-w);margin:0 auto">
+  <h2 data-i18n="zh" class="show">6. 开发指南</h2>
+  <h2 data-i18n="en">6. Development Guide</h2>
+  <h2 data-i18n="ja">6. 開発ガイド</h2>
   <pre><code>
   # Prerequisites: Node 20+, Python 3.12+, Docker
   git clone https://github.com/Vesper36/inkweave.git
   cd inkweave
 
   # Backend
-  cd backend
-  python3 -m venv .venv && source .venv/bin/activate
+  cd backend && python3 -m venv .venv && source .venv/bin/activate
   pip install -r requirements.txt
 
   # Frontend
-  cd ../frontend
-  npm install
+  cd ../frontend && npm install
 
-  # Start infrastructure (Postgres + Redis + Meilisearch)
-  cd ..
+  # Infrastructure
   docker compose -p inkweave up -d postgres redis meilisearch
 
-  # Initialize database
-  cd backend
+  # Init DB
+  cd ../backend
   DATABASE_URL="postgresql+asyncpg://inkweave:inkweave_dev_2024@localhost:5432/inkweave" \
     python scripts/init_db.py
 
-  # Start backend (port 8000)
-  DATABASE_URL="postgresql+asyncpg://inkweave:inkweave_dev_2024@localhost:5432/inkweave" \
-    REDIS_URL="redis://localhost:6379/0" \
-    uvicorn app.main:app --reload
-
-  # Start frontend (port 3000)
-  cd ../frontend && npm run dev
+  # Run
+  uvicorn app.main:app --reload  # backend :8000
+  npm run dev                      # frontend :3000
   </code></pre>
 
-  <h3>Environment Variables</h3>
-  <table>
-    <tr><th>Variable</th><th>Default</th><th>Description</th></tr>
-    <tr><td><code>DATABASE_URL</code></td><td>postgresql+asyncpg://...</td><td>PostgreSQL connection</td></tr>
-    <tr><td><code>REDIS_URL</code></td><td>redis://localhost:6379/0</td><td>Redis connection</td></tr>
-    <tr><td><code>MEILI_URL</code></td><td>http://localhost:7700</td><td>Meilisearch endpoint</td></tr>
-    <tr><td><code>SECRET_KEY</code></td><td>(required)</td><td>JWT signing key</td></tr>
-    <tr><td><code>CORS_ORIGINS</code></td><td>http://localhost:3000</td><td>Allowed origins</td></tr>
-  </table>
-
-  <h3>Database Migrations</h3>
-  <pre><code>
-  # Generate migration
-  cd backend
-  alembic revision --autogenerate -m "description"
-
-  # Apply migration
-  alembic upgrade head
-
-  # Rollback
-  alembic downgrade -1
-  </code></pre>
-
-  <h3>Theme System</h3>
-  <p>4 preset themes defined via CSS Custom Properties. Add new themes in <code>frontend/src/lib/themes.ts</code>:</p>
+  <h3 data-i18n="zh" class="show">主题系统</h3>
+  <h3 data-i18n="en">Theme System</h3>
+  <h3 data-i18n="ja">テーマシステム</h3>
+  <p data-i18n="zh" class="show">4 套预设主题通过 CSS Custom Properties 定义，可在 <code>frontend/src/lib/themes.ts</code> 中添加新主题：</p>
+  <p data-i18n="en">4 preset themes defined via CSS Custom Properties. Add new themes in <code>frontend/src/lib/themes.ts</code>:</p>
+  <p data-i18n="ja">4つのプリセットテーマはCSS Custom Propertiesで定義。<code>frontend/src/lib/themes.ts</code>で新テーマ追加：</p>
   <pre><code>
   export const themes = [
-    { id: "light",    name: "晨光白",   variables: { ... } },
-    { id: "dark",     name: "深夜黑",   variables: { ... } },
-    { id: "parchment",name: "羊皮纸",   variables: { ... } },
-    { id: "eyecare",  name: "护眼绿",   variables: { ... } },
+    { id: "light",    name: "晨光白",   nameEn: "Morning Light" },
+    { id: "dark",     name: "深夜黑",   nameEn: "Midnight" },
+    { id: "parchment",name: "羊皮纸",   nameEn: "Parchment" },
+    { id: "eyecare",  name: "护眼绿",   nameEn: "Eye Care" },
   ];
   </code></pre>
   </div>
@@ -505,59 +341,68 @@
 
 <!-- FAQ -->
 <section class="section" id="faq">
-  <h2>7. FAQ & Roadmap</h2>
+  <h2 data-i18n="zh" class="show">7. FAQ</h2>
+  <h2 data-i18n="en">7. FAQ</h2>
+  <h2 data-i18n="ja">7. FAQ</h2>
 
-  <h3>Current Status: <span class="badge badge-a">Phase 1 - MVP Skeleton</span></h3>
-  <ul>
-    <li>Frontend pages: Home, Browse, Tags, Work Detail, Chapter Reader, Write</li>
-    <li>Backend API: Auth (3), Works (4), Volumes (2), Chapters (3), Tags (3)</li>
-    <li>Theme engine with 4 presets</li>
-    <li>Seed data: 3 users, 3 works, 5 chapters, 10 tags</li>
-  </ul>
-
-  <h3>Upcoming Milestones</h3>
+  <h3 data-i18n="zh" class="show">测试账号</h3>
+  <h3 data-i18n="en">Test Accounts</h3>
+  <h3 data-i18n="ja">テストアカウント</h3>
   <table>
-    <tr><th>Phase</th><th>Features</th><th>ETA</th></tr>
-    <tr><td>2 - Editor</td><td>MDX editor with CodeMirror 6, live preview, auto-save, draft management</td><td>TBD</td></tr>
-    <tr><td>3 - Search</td><td>Meilisearch integration, full-text search, faceted filtering, pinyin support</td><td>TBD</td></tr>
-    <tr><td>4 - Auth UI</td><td>Login/Register pages, profile management, reading history</td><td>TBD</td></tr>
-    <tr><td>5 - Production</td><td>PWA, offline cache, SEO optimization, accessibility audit, performance tuning</td><td>TBD</td></tr>
+    <tr><th data-i18n="zh" class="show">账号</th><th data-i18n="en">Account</th><th data-i18n="ja">アカウント</th><th>Password</th><th>Role</th></tr>
+    <tr><td>admin</td><td>admin123</td><td>admin</td></tr>
+    <tr><td>evelync</td><td>author123</td><td>author</td></tr>
+    <tr><td>starwriter</td><td>author123</td><td>author</td></tr>
   </table>
 
-  <h3>FAQ</h3>
-  <p><strong>Q: What port does the demo run on?</strong><br>
-  A: The demo is served via Nginx on HTTPS (443) at <a href="https://inkweave.demo.vesper36.cc">inkweave.demo.vesper36.cc</a>. Internal containers use ports 51637 (frontend) and 51638 (backend).</p>
-
-  <p><strong>Q: Where is the documentation?</strong><br>
-  A: <a href="https://inkweave.docs.vesper36.cc">inkweave.docs.vesper36.cc</a> (this page) served on internal port 40001.</p>
-
-  <p><strong>Q: How to update the demo?</strong><br>
-  A: <code>cd /opt/inkweave && git pull && docker compose -p inkweave -f docker-compose.prod.yml up -d --build</code></p>
-
-  <p><strong>Q: Test accounts?</strong><br>
-  A: admin/admin123 (admin), evelync/author123 (author), starwriter/author123 (author)</p>
+  <h3 data-i18n="zh" class="show">路线图</h3>
+  <h3 data-i18n="en">Roadmap</h3>
+  <h3 data-i18n="ja">ロードマップ</h3>
+  <table>
+    <tr><th>Phase</th><th data-i18n="zh" class="show">功能</th><th data-i18n="en">Features</th><th data-i18n="ja">機能</th></tr>
+    <tr><td data-i18n="zh" class="show">已完成</td><td data-i18n="en">Done</td><td data-i18n="ja">完了</td><td data-i18n="zh" class="show">MVP 骨架、中文本地化、Docker 部署、自动更新</td><td data-i18n="en">MVP skeleton, i18n, Docker deploy, auto-update</td><td data-i18n="ja">MVPスケルトン、i18n、Dockerデプロイ、自動更新</td></tr>
+    <tr><td>2</td><td data-i18n="zh" class="show">编辑器</td><td data-i18n="en">Editor</td><td data-i18n="ja">エディタ</td><td data-i18n="zh" class="show">CodeMirror 6 + MDX 实时预览 + 自动保存</td><td data-i18n="en">CodeMirror 6 + MDX live preview + auto-save</td><td data-i18n="ja">CodeMirror 6 + MDXライブプレビュー + 自動保存</td></tr>
+    <tr><td>3</td><td data-i18n="zh" class="show">搜索</td><td data-i18n="en">Search</td><td data-i18n="ja">検索</td><td data-i18n="zh" class="show">isearch 索引 + 拼音 + 分面过滤</td><td data-i18n="en">Meilisearch index + pinyin + faceted filter</td><td data-i18n="ja">Meilisearchインデックス + ピンイン + ファセットフィルタ</td></tr>
+    <tr><td>4</td><td data-i18n="zh" class="show">认证 UI</td><td data-i18n="en">Auth UI</td><td data-i18n="ja">認証UI</td><td data-i18n="zh" class="show">登录/注册页面、个人中心、阅读历史</td><td data-i18n="en">Login/Register pages, profile, reading history</td><td data-i18n="ja">ログイン/登録ページ、プロフィール、読書履歴</td></tr>
+    <tr><td>5</td><td data-i18n="zh" class="show">生产就绪</td><td data-i18n="en">Production</td><td data-i18n="ja">本番</td><td data-i18n="zh" class="show">PWA、离线缓存、SEO、无障碍审计</td><td data-i18n="en">PWA, offline cache, SEO, accessibility audit</td><td data-i18n="ja">PWA、オフラインキャッシュ、SEO、アクセシビリティ監査</td></tr>
+  </table>
 </section>
 
 <footer class="footer">
-  <p>InkWeave (墨织) — A Structured Narrative Platform | <a href="https://github.com/Vesper36/inkweave">GitHub</a> | Demo: <a href="https://inkweave.demo.vesper36.cc">inkweave.demo.vesper36.cc</a> | Docs: <a href="https://inkweave.docs.vesper36.cc">inkweave.docs.vesper36.cc</a></p>
-  <p style="margin-top:8px;">&copy; 2026 InkWeave. Built with care for creators and readers.</p>
+  <p data-i18n="zh" class="show">墨织 InkWeave — 面向创作者与读者的结构化叙事平台 | <a href="https://github.com/Vesper36/inkweave">GitHub</a> | <a href="https://inkweave.demo.vesper36.cc">Demo</a> | <a href="https://inkweave.docs.vesper36.cc">文档</a></p>
+  <p data-i18n="en">InkWeave — A Structured Narrative Platform | <a href="https://github.com/Vesper36/inkweave">GitHub</a> | <a href="https://inkweave.demo.vesper36.cc">Demo</a> | <a href="https://inkweave.docs.vesper36.cc">Docs</a></p>
+  <p data-i18n="ja">墨織 InkWeave — 構造化ナラティブプラットフォーム | <a href="https://github.com/Vesper36/inkweave">GitHub</a> | <a href="https://inkweave.demo.vesper36.cc">デモ</a> | <a href="https://inkweave.docs.vesper36.cc">ドキュメント</a></p>
 </footer>
 
 <script>
-  // Active nav highlight
-  const sections = document.querySelectorAll('.section');
-  const navLinks = document.querySelectorAll('.nav a');
-  const observer = new IntersectionObserver(entries => {
-    entries.forEach(e => {
-      if (e.isIntersecting) {
-        navLinks.forEach(l => l.classList.remove('active'));
-        const id = e.target.id || e.target.querySelector('[id]')?.id;
-        const link = document.querySelector(`.nav a[href="#${id}"]`);
-        if (link) link.classList.add('active');
-      }
-    });
-  }, { threshold: 0.3 });
-  sections.forEach(s => observer.observe(s));
+function setLang(lang){
+  document.querySelectorAll('[data-i18n]').forEach(el=>{
+    el.classList.toggle('show',el.getAttribute('data-i18n')===lang);
+  });
+  document.querySelectorAll('.lang-switch button').forEach(btn=>{
+    btn.classList.toggle('active',btn.id==='btn-'+lang);
+  });
+  localStorage.setItem('inkweave-docs-lang',lang);
+  document.documentElement.lang=lang==='zh'?'zh-CN':lang==='ja'?'ja':'en';
+}
+// Init
+const saved=localStorage.getItem('inkweave-docs-lang');
+const browserLang=navigator.language.startsWith('zh')?'zh':navigator.language.startsWith('ja')?'ja':'en';
+setLang(saved||browserLang);
+
+// Active nav
+const sections=document.querySelectorAll('.section');
+const navLinks=document.querySelectorAll('.nav a');
+const obs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      navLinks.forEach(l=>l.classList.remove('active'));
+      const id=e.target.id||e.target.querySelector('[id]')?.id;
+      document.querySelectorAll('.nav a[href="#'+id+'"]').forEach(l=>l.classList.add('active));
+    }
+  });
+},{threshold:0.3});
+sections.forEach(s=>obs.observe(s));
 </script>
 </body>
 </html>
